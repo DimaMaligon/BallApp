@@ -1,17 +1,17 @@
 package com.example.ballapp
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
-import androidx.core.view.isInvisible
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ballapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    var timer : CountDownTimer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
     private fun animationText(timerSeconds: Long = 3) {
         binding.apply {
             button.setOnClickListener {
-
-                object : CountDownTimer((timerSeconds * 1000), 1000) {
+              timer?.cancel()
+              timer =  object : CountDownTimer((timerSeconds * 1000), 1000) {
                     override fun onTick(millisUntilFinished: Long) {
                         textDesire.visibility = View.INVISIBLE
                     }
